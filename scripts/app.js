@@ -5,7 +5,9 @@ const accordionBodies = document.querySelectorAll(".accordion__body");
 
 accordionBodies.forEach((body) => {
   body.addEventListener("transitionend", () => {
-    window.scroll(0, document.body.scrollHeight - body.scrollHeight * 0.5);
+    if (!matchMedia("(max-width: 767.98px)").matches) {
+      window.scroll(0, document.body.scrollHeight - body.scrollHeight * 0.5);
+    }
   });
 });
 
