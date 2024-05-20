@@ -17,20 +17,24 @@ accordionButtons.forEach((button, index) => {
 
 window.addEventListener("scroll", () => {
   const sideBarLogos = document.querySelectorAll(".main__sidebar-logo");
-  const sideBarList = document.querySelector(".main__sidebar-list");
+  const sideBarLists = document.querySelectorAll(".main__sidebar-list");
 
   const targetElement = document.querySelector(".program__title");
   const elementPosition = targetElement.getBoundingClientRect().top;
-  console.log(elementPosition);
+
   const windowHeight = window.innerHeight;
 
-  sideBarLogos.forEach((logo) => {
+  sideBarLists.forEach((list) => {
     if (elementPosition < windowHeight) {
-      logo.classList.add("main__sidebar-logo_visible");
-      sideBarList.classList.add("main__sidebar-list_scrolled");
+      list.classList.add("main__sidebar-list_scrolled");
+      sideBarLogos.forEach((logo) => {
+        logo.classList.add("main__sidebar-logo_visible");
+      });
     } else {
-      logo.classList.remove("main__sidebar-logo_visible");
-      sideBarList.classList.remove("main__sidebar-list_scrolled");
+      list.classList.remove("main__sidebar-list_scrolled");
+      sideBarLogos.forEach((logo) => {
+        logo.classList.remove("main__sidebar-logo_visible");
+      });
     }
   });
 });

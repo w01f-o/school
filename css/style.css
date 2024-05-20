@@ -300,6 +300,11 @@ html {
   padding: 100px 0 40px;
   transition: 0.2s;
 }
+@media (max-width: 767.98px) {
+  .main__sidebar-list_scrolled {
+    padding: 40px 0;
+  }
+}
 .main__sidebar-item {
   font-size: 18px;
 }
@@ -619,7 +624,7 @@ html {
   width: 50vw;
   height: 100vh;
   transition: 0.2s;
-  padding: 30px 20px;
+  padding: 50px 20px;
   background: var(--whiteColor);
   overflow: auto;
 }
@@ -629,10 +634,9 @@ html {
   }
 }
 .burger__menu .main__sidebar-logo {
-  width: 30%;
+  width: 50%;
 }
 .burger__menu .main__sidebar-list {
-  padding: 40px 0;
   gap: 20px;
 }
 
