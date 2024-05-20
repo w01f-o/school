@@ -1,4 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-cyr.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-latin.woff2") format("woff2");
+}
 
 :root {
   --fontFamily: "Inter", sans-serif;
