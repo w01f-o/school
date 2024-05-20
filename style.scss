@@ -26,6 +26,7 @@ ul {
 
 html {
   scroll-behavior: smooth;
+  scroll-padding: 16px;
 }
 
 .body {
@@ -35,6 +36,19 @@ html {
 
   background: var(--whiteColor);
   color: var(--blackColor);
+
+  &__backdrop_active {
+    &::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+
+      width: 100vw;
+      height: 100vh;
+
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
 }
 
 /* Header */
@@ -43,6 +57,10 @@ html {
   &__row {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: 1199.98px) {
+      justify-content: center;
+    }
 
     &:nth-child(1) {
       align-items: center;
@@ -53,13 +71,36 @@ html {
       align-items: flex-start;
       background: var(--blueColor);
       padding: 20px 25px 60px;
+
+      @media (max-width: 767.98px) {
+        padding: 20px;
+        align-items: center;
+      }
+
+      .dropdown {
+        flex-grow: 1;
+        padding-left: 60px;
+
+        @media (max-width: 575.98px) {
+          padding: 0;
+        }
+      }
+
+      @media (max-width: 575.98px) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   }
 
   &__image {
-    width: 15%;
+    width: 10%;
     img {
       max-width: 100%;
+    }
+
+    @media (max-width: 1199.98px) {
+      display: none;
     }
   }
 
@@ -72,6 +113,18 @@ html {
       size: 24px;
       weight: 400;
     }
+
+    @media (max-width: 767.98px) {
+      font: {
+        size: 20px;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      font: {
+        size: 16px;
+      }
+    }
   }
 
   &__title {
@@ -79,10 +132,27 @@ html {
       size: 48px;
       weight: 400;
     }
+
+    @media (max-width: 767.98px) {
+      font: {
+        size: 36px;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      font: {
+        size: 26px;
+      }
+    }
   }
 
   &__search {
     position: relative;
+
+    @media (max-width: 575.98px) {
+      margin-bottom: 12px;
+      width: 100%;
+    }
 
     &-label {
       display: flex;
@@ -114,11 +184,19 @@ html {
       &:not(:placeholder-shown) + .header__search-label {
         display: none;
       }
+
+      @media (max-width: 575.98px) {
+        width: 100%;
+      }
     }
   }
 }
 
 .nav {
+  @media (max-width: 767.98px) {
+    display: none;
+  }
+
   flex-grow: 1;
 
   &__list {
@@ -144,6 +222,66 @@ html {
     font: {
       size: 18px;
     }
+  }
+}
+
+.dropdown {
+  display: none;
+  position: relative;
+
+  @media (max-width: 767.98px) {
+    display: block;
+  }
+
+  &__button {
+    border: none;
+    padding: 6px 20px;
+
+    font: {
+      size: 20px;
+    }
+  }
+
+  &__content {
+    $transitionTime: 0.1s;
+
+    position: absolute;
+    top: 100%;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    transition: $transitionTime;
+
+    background: var(--blueColor);
+
+    &_open {
+      opacity: 1;
+      visibility: visible;
+
+      transition: $transitionTime;
+    }
+  }
+}
+
+.mobile-nav {
+  &__link {
+    font: {
+      size: 20px;
+    }
+    color: var(--whiteColor);
+  }
+
+  &__item {
+    padding: 15px;
+
+    @media (max-width: 575.98px) {
+      width: 200px;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -174,6 +312,18 @@ html {
     top: 0;
     width: 20%;
 
+    @media (max-width: 1199.98px) {
+      width: 30%;
+    }
+
+    @media (max-width: 991.98px) {
+      width: 40%;
+    }
+
+    @media (max-width: 767.98px) {
+      display: none;
+    }
+
     padding: 20px;
 
     &-logo {
@@ -183,7 +333,7 @@ html {
       left: -100%;
       opacity: 0;
       visibility: hidden;
-      transition: opacity $transitionTime;
+      transition: $transitionTime;
 
       width: 70%;
 
@@ -196,17 +346,21 @@ html {
         opacity: 1;
         visibility: visible;
 
-        transition: opacity $transitionTime;
+        transition: $transitionTime;
       }
     }
 
     &-list {
+      $transitionTime: 0.2s;
+
       display: flex;
       flex-direction: column;
       gap: 12px;
+      transition: $transitionTime;
 
       &_scrolled {
         padding: 100px 0 40px;
+        transition: $transitionTime;
       }
     }
 
@@ -246,6 +400,18 @@ html {
 
   &__content {
     width: 80%;
+
+    @media (max-width: 1199.98px) {
+      width: 70%;
+    }
+
+    @media (max-width: 991.98px) {
+      width: 60%;
+    }
+
+    @media (max-width: 767.98px) {
+      width: 100%;
+    }
   }
 }
 
@@ -257,7 +423,7 @@ html {
   }
 
   &__image {
-    width: 70%;
+    width: 50%;
 
     img {
       max-width: 100%;
@@ -269,6 +435,10 @@ html {
     flex-direction: column;
     gap: 12px;
     align-self: flex-end;
+
+    @media (max-width: 991.98px) {
+      padding: 40px 20px;
+    }
   }
 
   &__item {
@@ -292,6 +462,11 @@ html {
     padding: 0 0 40px 80px;
     width: 70%;
 
+    @media (max-width: 991.98px) {
+      width: 100%;
+      padding: 0 40px 40px 40px;
+    }
+
     &-title {
       font: {
         size: 32px;
@@ -314,12 +489,24 @@ html {
 
     &-text {
       width: 70%;
+
+      @media (max-width: 767.98px) {
+        width: 100%;
+
+        font: {
+          size: 18px;
+        }
+      }
     }
 
     &-image {
       width: 30%;
       img {
         max-width: 100%;
+      }
+
+      @media (max-width: 1199.98px) {
+        display: none;
       }
     }
   }
@@ -328,6 +515,11 @@ html {
 .program {
   padding: 0 0 20px 80px;
   width: 70%;
+
+  @media (max-width: 991.98px) {
+    width: 100%;
+    padding: 0 40px 20px 40px;
+  }
 
   &__title {
     border-block: 1px solid var(--redColor);
@@ -347,6 +539,11 @@ html {
 .news {
   padding-left: 80px;
   width: 80%;
+
+  @media (max-width: 991.98px) {
+    width: 100%;
+    padding: 0 40px 0 40px;
+  }
 
   &__wrapper {
     display: flex;
@@ -374,6 +571,14 @@ html {
       img {
         max-width: 100%;
       }
+
+      @media (max-width: 1199.98px) {
+        width: 40%;
+      }
+
+      @media (max-width: 991.98px) {
+        width: 100%;
+      }
     }
 
     &-text {
@@ -383,11 +588,23 @@ html {
       font: {
         size: 18px;
       }
+
+      @media (max-width: 1199.98px) {
+        width: 60%;
+      }
+
+      @media (max-width: 991.98px) {
+        width: 100%;
+      }
     }
 
     &-wrapper {
       display: flex;
       gap: 20px;
+
+      @media (max-width: 991.98px) {
+        flex-direction: column;
+      }
     }
   }
 }
@@ -396,7 +613,9 @@ html {
   padding: 0 0 40px 80px;
   width: 80%;
 
-  &__title {
+  @media (max-width: 991.98px) {
+    width: 100%;
+    padding: 0 40px 40px;
   }
 
   &__wrapper {
@@ -448,4 +667,119 @@ html {
   &__content {
     overflow: hidden;
   }
+}
+
+.burger {
+  display: none;
+
+  @media (max-width: 767.98px) {
+    display: block;
+  }
+
+  $transitionTime: 0.2s;
+
+  &__button {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: var(--blackColor);
+
+    span {
+      display: block;
+      width: 65%;
+      height: 3px;
+      position: absolute;
+      left: 50%;
+      pointer-events: none;
+      transform: translateX(-50%);
+      background: var(--whiteColor);
+
+      &:nth-child(1) {
+        top: 12px;
+      }
+
+      &:nth-child(2) {
+        transform: translate(-50%, -50%);
+        top: 50%;
+      }
+
+      &:nth-child(3) {
+        bottom: 12px;
+      }
+      transition: $transitionTime;
+    }
+  }
+
+  &_open {
+    .burger__menu {
+      left: 0;
+      visibility: visible;
+      transition: $transitionTime;
+    }
+
+    span {
+      &:nth-child(1) {
+        top: 48%;
+        transform: translateX(-50%) rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        top: 48%;
+        transform: translateX(-50%) rotate(135deg);
+      }
+      transition: $transitionTime;
+    }
+  }
+
+  &__menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    visibility: hidden;
+    z-index: 500;
+    width: 50vw;
+    height: 100vh;
+    transition: $transitionTime;
+    padding: 30px 20px;
+    background: var(--whiteColor);
+    overflow: auto;
+
+    @media (max-width: 575.98px) {
+      width: 70vw;
+    }
+
+    .main__sidebar {
+      &-logo {
+        width: 30%;
+      }
+
+      &-list {
+        padding: 40px 0;
+        gap: 20px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1399.98px) {
+}
+
+@media (max-width: 1199.98px) {
+}
+
+@media (max-width: 991.98px) {
+}
+
+@media (max-width: 767.98px) {
+}
+
+@media (max-width: 575.98px) {
 }
